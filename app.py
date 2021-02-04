@@ -1,27 +1,13 @@
 
 from flask import Flask, Response, request, render_template, jsonify
-import numpy as np
-import pickle
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import os
-import requests
-from bs4 import BeautifulSoup
-
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import PassiveAggressiveClassifier
-
 from sklearn import metrics
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import classification_report
-import pickle
 import joblib
-
 from newspaper import fulltext
 import requests
 

@@ -11,7 +11,7 @@ import joblib
 from newspaper import fulltext
 import requests
 
-app = Flask('my_app')
+app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('home.html')

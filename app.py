@@ -123,7 +123,8 @@ def submit():
                 algorithm_pred FLOAT)'''
 
     query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
-                    VALUES(?,?,?,?) '''
+                    VALUES(%s, %s, %s,%s)'''
+# might need to include something like this for previous ignore: ON CONFLICT (url) DO NOTHING;                    
 
     # conn = None
     # try:

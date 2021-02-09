@@ -122,7 +122,7 @@ def submit():
                 user_pred CHAR,
                 algorithm_pred FLOAT)'''
 
-    query_2 = ''' INSERT OR IGNORE INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
+    query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
                     VALUES(?,?,?,?) '''
 
     # conn = None

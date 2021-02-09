@@ -12,6 +12,7 @@ from newspaper import fulltext
 import requests
 import sqlite3
 from sqlite3 import Error
+from scipy import stats
 
 app = Flask(__name__)
 @app.route('/')
@@ -72,13 +73,14 @@ def submit():
     tfidf_pac_classifier = joblib.load(model_dir + filename)
     pac_pred = tfidf_pac_classifier.predict(X_test)[0]
     pac_pdf = tfidf_pac_classifier.decision_function(X_test)[0]
+    pac_proba = stats.norm.cdf(pac_pdf)
 
     # loading the TF-IDF Support Vector Machine Model:
     filename = 'tfidf_svm_classifier.sav'
     tfidf_svm_classifier = joblib.load(model_dir + filename)
     svm_pred = tfidf_svm_classifier.predict(X_test)[0]
     svm_pdf = tfidf_svm_classifier.decision_function(X_test)[0]
-    
+    svm_proba = stats.norm.cdf(svm_pdf)
     
     # this counter with track the overall truthiness of the models:
     fake_news_counter = 0
@@ -135,8 +137,8 @@ def submit():
                             nb_pred=nb_pred, nb_proba=round(nb_proba,2), 
                             lr_pred=lr_pred, lr_proba=round(lr_proba,2), 
                             rf_pred=rf_pred, rf_proba=round(rf_proba,2), 
-                            pac_pred=pac_pred, pac_pdf=round(pac_pdf,2), 
-                            svm_pred=svm_pred, svm_pdf=round(svm_pdf,2), 
+                            pac_pred=pac_pred, pac_pdf=round(pac_proba,2), 
+                            svm_pred=svm_pred, svm_pdf=round(svm_proba,2), 
                             fake_news_counter=fake_news_counter, 
                             conclusion = conclusion)
 

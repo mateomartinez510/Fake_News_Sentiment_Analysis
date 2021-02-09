@@ -10,6 +10,8 @@ from sklearn.metrics import classification_report
 import joblib
 from newspaper import fulltext
 import requests
+import sqlite3
+from sqlite3 import Error
 
 app = Flask(__name__)
 @app.route('/')
@@ -99,6 +101,35 @@ def submit():
           conclusion = "Based on these results, the majority of the models determined this to be FAKE news!"            
   
 #####
+
+    # saving data to SQL database
+
+    db_file = "database/fake_news_database.db"
+
+    query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_table(
+                url CHAR PRIMARY KEY,
+                article_body CHAR,
+                user_pred CHAR,
+                algorithm_pred FLOAT)'''
+
+    query_2 = ''' INSERT OR IGNORE INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
+                    VALUES(?,?,?,?) '''
+
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+
+    # create a database connection
+    with conn:
+        new_data = (news_article_URL, text, user_input_prediction,fake_news_counter)
+        cur = conn.cursor()
+        # create table if not exists
+        cur.execute(query_1)
+         # append data to table
+        cur.execute(query_2, new_data)
+
     return render_template('predictions.html', url_submitted = news_article_URL, article_body = text, 
                             user_input_prediction=user_input_prediction, 
                             nb_pred=nb_pred, nb_proba=round(nb_proba,2), 

@@ -32,7 +32,7 @@ def form():
 def submit():
 
     # loading TF-IDF Vectorizer weights:
-    model_dir = 'models/'
+    model_dir = 'pkl_files/'
     filename = 'tfidf_vectorizer.sav'
     tfidf_vectorizer = joblib.load(model_dir + filename)
 

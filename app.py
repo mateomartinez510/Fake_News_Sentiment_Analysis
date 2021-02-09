@@ -101,12 +101,17 @@ def submit():
     if svm_pred == "fake":
         fake_news_counter += 1
 
+    # this variable with be used for logging predictions for the SQL database
+    algorithm_pred = ""
 
     if fake_news_counter <= 3:
           conclusion = "Based on these results, the majority of the models determined this to be REAL news!"
+          algorithm_pred = "real"
     else:
-          conclusion = "Based on these results, the majority of the models determined this to be FAKE news!"            
-  
+          conclusion = "Based on these results, the majority of the models determined this to be FAKE news!" 
+          algorithm_pred = "fake"   
+              
+
 #####
 
     # saving data to SQL database
@@ -116,7 +121,7 @@ def submit():
     # setting connection variable to None for later try/except statement
     conn = None     
     # the data to be appended to database
-    new_data = (news_article_URL, text[:100], user_input_prediction,fake_news_counter)
+    new_data = (news_article_URL, text, user_input_prediction,algorithm_pred)
 
     query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_table(
                 url TEXT PRIMARY KEY,
@@ -126,13 +131,6 @@ def submit():
 
     query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
                     VALUES(%s, %s, %s, %s);'''
-# might need to include something like this for previous ignore: ON CONFLICT (url) DO NOTHING;                    
-
-    # conn = None
-    # try:
-    #     conn = sqlite3.connect(db_file)
-    # except Error as e:
-    #     print(e)
 
     # create a database connection
     try:

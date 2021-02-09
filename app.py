@@ -117,9 +117,9 @@ def submit():
     new_data = (news_article_URL, text, user_input_prediction,fake_news_counter)
 
     query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_table(
-                url CHAR,
+                url TEXT,
                 article_body TEXT,
-                user_pred CHAR,
+                user_pred TEXT,
                 algorithm_pred FLOAT)'''
 
     query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)

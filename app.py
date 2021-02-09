@@ -127,7 +127,7 @@ def submit():
                 url TEXT PRIMARY KEY,
                 article_body TEXT,
                 user_pred TEXT,
-                algorithm_pred FLOAT);'''
+                algorithm_pred TEXT);'''
 
     query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
                     VALUES(%s, %s, %s, %s);'''
@@ -144,14 +144,14 @@ def submit():
         cur.execute(query_2, new_data)
         # commit the changes to the database
         conn.commit()
-        # # close communication with the database
-        # cur.close()
+        # close communication with the database
+        cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    # finally:
-    #     if conn is not None:
-    #         conn.close()
+    finally:
+        if conn is not None:
+            conn.close()
 
     return render_template('predictions.html', url_submitted = news_article_URL, article_body = text, 
                             user_input_prediction=user_input_prediction, 

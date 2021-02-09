@@ -13,6 +13,11 @@ import requests
 import sqlite3
 from sqlite3 import Error
 from scipy import stats
+import os
+import psycopg2
+
+
+
 
 app = Flask(__name__)
 @app.route('/')
@@ -106,7 +111,10 @@ def submit():
 
     # saving data to SQL database
 
-    db_file = "database/fake_news_database.db"
+    #db_file = "database/fake_news_database.db"
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    new_data = (news_article_URL, text, user_input_prediction,fake_news_counter)
 
     query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_table(
                 url CHAR PRIMARY KEY,
@@ -117,15 +125,14 @@ def submit():
     query_2 = ''' INSERT OR IGNORE INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
                     VALUES(?,?,?,?) '''
 
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-    except Error as e:
-        print(e)
+    # conn = None
+    # try:
+    #     conn = sqlite3.connect(db_file)
+    # except Error as e:
+    #     print(e)
 
     # create a database connection
     with conn:
-        new_data = (news_article_URL, text, user_input_prediction,fake_news_counter)
         cur = conn.cursor()
         # create table if not exists
         cur.execute(query_1)

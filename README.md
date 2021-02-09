@@ -1,3 +1,7 @@
 # Fake_News_Sentiment_Analysis
 
-This project is a work in progress. The trained models will be deployed in Flask app to Heroku. Hopefully the EDA and model training will reside in this repo as well, but might need to be stored separately.
+This project is a work in progress. This project entails training a classification model that uses sentiment anlaysis to determine if a piece of journalism is real or fake news.
+
+You can check out the deployed Flask app here: [Fake News Detection App](https://fakenewssentimentanalysis.herokuapp.com/)
+
+

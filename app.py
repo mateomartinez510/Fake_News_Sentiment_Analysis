@@ -114,7 +114,7 @@ def submit():
     #db_file = "database/fake_news_database.db"
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    new_data = (news_article_URL, text, user_input_prediction,fake_news_counter)
+    new_data = (news_article_URL, text[:100], user_input_prediction,fake_news_counter)
 
     query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_table(
                 url TEXT,

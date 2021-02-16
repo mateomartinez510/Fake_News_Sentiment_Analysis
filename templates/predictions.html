@@ -9,11 +9,11 @@
     <p>Your prediction: {{user_input_prediction}}</p>
     <p>Predictions from 5 Classification Models:</p>
     <ul>
-        <li> The Naive Bayes model predicts your news is: {{nb_pred}}<br> with a {{nb_proba}} probability of being real news.<br> <br> </li>
-        <li> The Logistic Regression model predicts your news is: {{lr_pred}}<br> with a {{lr_proba}} probability of being real news.<br> <br> </li>
-        <li> The Random Forest model predicts your news is: {{rf_pred}} <br> with a {{rf_proba}} probability of being real news. <br> <br> </li>
-        <li> The Passive Aggressive Classification model predicts your news is: {{pac_pred}} <br> with a {{pac_pdf}} probability of being real news. <br> <br> </li>
-        <li> The Support Vector Machine model predicts your news is: {{svm_pred}} <br> with a {{svm_pdf}} probability of being real news. <br> <br> </li>
+        <li> The Naive Bayes model with TF-IDF Vectorizer predicts your news is: {{nb_pred}}<br> with a {{nb_proba}} probability of being real news.<br> <br> </li>
+        <li> The Logistic Regression model with TF-IDF Vectorizer predicts your news is: {{lr_pred}}<br> with a {{lr_proba}} probability of being real news.<br> <br> </li>
+        <li> The Random Forest model with TF-IDF Vectorizer predicts your news is: {{rf_pred}} <br> with a {{rf_proba}} probability of being real news. <br> <br> </li>
+        <li> The Passive Aggressive Classification model with TF-IDF Vectorizer predicts your news is: {{pac_pred}} <br> with a {{pac_pdf}} probability of being real news. <br> <br> </li>
+        <li> The Support Vector Machine model with TF-IDF Vectorizer predicts your news is: {{svm_pred}} <br> with a {{svm_pdf}} probability of being real news. <br> <br> </li>
     </ul>
     <p>{{fake_news_counter}} of 5 models identified this article as fake news! {{conclusion}}</p>
  

@@ -164,5 +164,33 @@ def submit():
                             conclusion = conclusion)
 
 
+
+### API Call
+
+@app.route('/todo/api/v1.0/tasks', methods=['POST'])
+
+def api_prediction():
+    if not request.json:
+        abort(400)
+
+
+
+    data = request.args
+    json_ = request.json
+    return data,json
+
+
+    # task = {
+    #     'id': tasks[-1]['id'] + 1,
+    #     'title': request.json['title'],
+    #     'description': request.json.get('description', ""),
+    #     'done': False
+    # }
+    #return jsonify({'task': task}), 201
+
+
+
+
+
 if __name__ =='__main__': 
     app.run(debug = True)    

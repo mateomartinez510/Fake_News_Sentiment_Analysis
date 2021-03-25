@@ -257,6 +257,51 @@ def api_prediction():
               
 
 
+
+
+    # saving API data to SQL database
+
+    #db_file = "database/fake_news_database.db"
+    DATABASE_URL = os.environ['DATABASE_URL']
+    # setting connection variable to None for later try/except statement
+    conn = None     
+    # the data to be appended to database
+    new_data = (news_article_URL, text, user_input_prediction,algorithm_pred)
+
+    query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_api_table(
+                url TEXT PRIMARY KEY,
+                article_body TEXT,
+                user_pred TEXT,
+                algorithm_pred TEXT);'''
+
+    query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
+                    VALUES(%s, %s, %s, %s);'''
+
+    # create a database connection
+    try:
+        # connect to the PostgreSQL database
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        # create a new cursor
+        cur = conn.cursor()
+        # create table if not exists
+        cur.execute(query_1)
+        # append data to table
+        cur.execute(query_2, new_data)
+        # commit the changes to the database
+        conn.commit()
+        # close communication with the database
+        cur.close()
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+
+### End SQL transaction
+
+### Returning output data for API request origin
+
     output = {"url_submitted" : news_article_URL, "article_body" : text, 
                             "user_input_prediction":user_input_prediction, 
                             "nb_pred":nb_pred, "nb_proba":round(nb_proba,2), 
@@ -269,8 +314,7 @@ def api_prediction():
                             "algorithm_pred" : algorithm_pred  
 
              }
-
-
+             
     return output, 201
 
 

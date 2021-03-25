@@ -266,7 +266,7 @@ def api_prediction():
     # setting connection variable to None for later try/except statement
     conn = None     
     # the data to be appended to database
-    new_data = (news_article_URL, text, user_input_prediction,algorithm_pred)
+    new_data = (news_article_URL, text, user_input_prediction, algorithm_pred)
 
     query_1 ='''CREATE TABLE IF NOT EXISTS fake_news_api_table(
                 url TEXT PRIMARY KEY,
@@ -274,7 +274,7 @@ def api_prediction():
                 user_pred TEXT,
                 algorithm_pred TEXT);'''
 
-    query_2 = ''' INSERT INTO fake_news_table(url,article_body,user_pred,algorithm_pred)
+    query_2 = ''' INSERT INTO fake_news_api_table(url,article_body,user_pred,algorithm_pred)
                     VALUES(%s, %s, %s, %s);'''
 
     # create a database connection
@@ -314,7 +314,7 @@ def api_prediction():
                             "algorithm_pred" : algorithm_pred  
 
              }
-             
+
     return output, 201
 
 

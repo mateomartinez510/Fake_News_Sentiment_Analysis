@@ -1,5 +1,5 @@
 
-from flask import Flask, Response, request, render_template, jsonify
+from flask import Flask, Response, request, render_template, jsonify, abort
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
@@ -176,8 +176,8 @@ def api_prediction():
 
 
     data = request.args
-    json_ = request.json
-    return data,json
+    foo = request.json
+    return data, foo
 
 
     # task = {

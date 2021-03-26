@@ -9,11 +9,10 @@ Here is the url to access the API (no access key):'https://fakenewssentimentanal
 
 The API accepts a POST argument of a JSON object consisting of two "key:value" pairs, a URL and a string stating if the user believes the article to be real of fake: {"URL":"some_website", "UserPrediction":"real_or_fake"}<br/>
 <br/>
-<br/>
-
 
 Below is an example of how to access the API using the Python requests library:<br/>
 <br/>
+import requests <br/>
 url = 'https://fakenewssentimentanalysis.herokuapp.com/todo/api/v1.0/tasks'<br/>
 myobj = {"URL":"https://zapatopi.net/treeoctopus/", "UserPrediction":"fake"}<br/>
 r = requests.post(url, json = myobj)<br/>
@@ -25,5 +24,5 @@ print(r.text)<br/>
 >>"fake_news_counter":5,<br/>
 >>"lr_pred":"fake","lr_proba":0.28,"nb_pred":"fake","nb_proba":0.41,"pac_pdf":0.41,"pac_pred":"fake",<br/>
 >>"rf_pred":"fake","rf_proba":0.38,"svm_pdf":0.38,"svm_pred":"fake",<br/>
->>"url_submitted":`"https://zapatopi.net/treeoctopus/"`, "user_input_prediction":"fake"}<br/>
+>>"url_submitted":"https:/<span>/zapatopi.<span/>net/treeoctopus/", "user_input_prediction":"fake"}<br/>
 

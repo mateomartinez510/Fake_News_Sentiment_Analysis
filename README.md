@@ -25,5 +25,5 @@ print(r.text)<br/>
 >>"fake_news_counter":5,<br/>
 >>"lr_pred":"fake","lr_proba":0.28,"nb_pred":"fake","nb_proba":0.41,"pac_pdf":0.41,"pac_pred":"fake",<br/>
 >>"rf_pred":"fake","rf_proba":0.38,"svm_pdf":0.38,"svm_pred":"fake",<br/>
->>"url_submitted":"https://zapatopi.net/treeoctopus/","user_input_prediction":"fake"}<br/>
+>>"url_submitted":`"https://zapatopi.net/treeoctopus/"`, "user_input_prediction":"fake"}<br/>
 
